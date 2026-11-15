@@ -1,0 +1,9 @@
+{
+  "name": "qrcode-stocker",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Browser-side QR decoder dependency used by the static frontend.",
+  "dependencies": {
+    "jsqr": "1.4.0"
+  }
+}

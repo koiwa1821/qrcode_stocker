@@ -1,0 +1,1 @@
+from api.function_app import app
