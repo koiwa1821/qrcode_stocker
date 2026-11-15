@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "skills": {
+    "azure-app-onboard": {
+      "source": "microsoft/azure-skills",
+      "ref": "main",
+      "sourceType": "github",
+      "skillPath": ".github/plugins/azure-skills/skills/azure-app-onboard/SKILL.md",
+      "computedHash": "ca1acdc015e6db77da7be57ccfc2960fb5a4937d39911204334e69ea38e5b8a4"
+    }
+  }
+}
