@@ -1,0 +1,47 @@
+name: Deploy QR Code Stocker
+
+on:
+push:
+branches: [main]
+workflow_dispatch:
+
+permissions:
+contents: read
+id-token: write
+
+env:
+AZURE_FUNCTIONAPP_NAME: va1qrstocker-dmb3ava0h7dwg3af
+
+jobs:
+deploy:
+runs-on: ubuntu-latest
+steps:
+- name: Check out repository
+uses: actions/checkout@v6
+
+- name: Sign in to Azure with OIDC
+uses: azure/login@v3
+with:
+client-id: ${{ vars.AZURE_CLIENT_ID }}
+tenant-id: ${{ vars.AZURE_TENANT_ID }}
+subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+- name: Deploy Function App
+uses: Azure/functions-action@v1
+with:
+app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+package: .
+remote-build: true
+respect-funcignore: true
+
+- name: Upload static site to Blob Storage
+uses: azure/cli@v2
+with:
+inlineScript: |
+az storage blob upload-batch \
+--account-name va1qrcodestocker \
+--auth-mode login \
+--destination '$web' \
+--source docs \
+--overwrite \
+--output none
